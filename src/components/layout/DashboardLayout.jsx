@@ -7,11 +7,13 @@ import { LogOut, Menu, X, ChevronRight } from 'lucide-react';
 
 const BORROWER_NAV = [
   { label: 'Dashboard', path: '/borrower', icon: '📊' },
+  { label: 'Onboarding', path: '/borrower/onboarding', icon: '🎯' },
   { label: 'Profile', path: '/borrower/profile', icon: '👤' },
-  { label: 'Application', path: '/borrower/application', icon: '📝' },
-  { label: 'Group', path: '/borrower/group', icon: '👥' },
+  { label: 'Questionnaire', path: '/borrower/questionnaire', icon: '📋' },
   { label: 'Documents', path: '/borrower/documents', icon: '📄' },
   { label: 'Consent', path: '/borrower/consent', icon: '✅' },
+  { label: 'Group', path: '/borrower/group', icon: '👥' },
+  { label: 'Application', path: '/borrower/application', icon: '📝' },
   { label: 'Repayments', path: '/borrower/repayments', icon: '💰' },
   { label: 'Support', path: '/borrower/support', icon: '💬' },
   { label: 'Settings', path: '/borrower/settings', icon: '⚙️' },
@@ -38,6 +40,7 @@ const ADMIN_NAV = [
   { label: 'Partners', path: '/admin/partners', icon: '🏦' },
   { label: 'Documents', path: '/admin/documents', icon: '📄' },
   { label: 'AI Analysis', path: '/admin/ai-analysis', icon: '🤖' },
+  { label: 'AI Prompts', path: '/admin/ai-prompts', icon: '✏️' },
   { label: 'Loans', path: '/admin/loans', icon: '💳' },
   { label: 'Repayments', path: '/admin/repayments', icon: '💰' },
   { label: 'Support', path: '/admin/support', icon: '💬' },

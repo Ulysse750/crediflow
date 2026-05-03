@@ -33,11 +33,18 @@ export default function PublicHeader() {
               </Button>
             </>
           ) : (
-            <Link to="/login">
-              <Button size="sm" className="gap-2 bg-primary hover:bg-primary/90">
-                <LogIn className="w-4 h-4" /> Login
-              </Button>
-            </Link>
+            <>
+              <Link to="/login">
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <LogIn className="w-4 h-4" /> Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button size="sm" className="gap-2 bg-primary hover:bg-primary/90">
+                  Create account
+                </Button>
+              </Link>
+            </>
           )}
         </nav>
 
@@ -57,7 +64,10 @@ export default function PublicHeader() {
               <button className="block text-sm py-2 text-destructive" onClick={() => { logout(); setOpen(false); }}>Logout</button>
             </>
           ) : (
-            <Link to="/login" className="block text-sm py-2 text-primary font-medium" onClick={() => setOpen(false)}>Login</Link>
+            <>
+              <Link to="/login" className="block text-sm py-2 text-primary font-medium" onClick={() => setOpen(false)}>Login</Link>
+              <Link to="/register" className="block text-sm py-2 font-medium text-secondary" onClick={() => setOpen(false)}>Create account</Link>
+            </>
           )}
         </div>
       )}
