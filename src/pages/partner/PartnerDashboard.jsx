@@ -8,7 +8,7 @@ import { FileText, CheckCircle, XCircle, AlertTriangle, CreditCard, Users, Clock
 
 export default function PartnerDashboard() {
   const { user } = useDemoAuth();
-  const data = getPartnerData(user.partnerId);
+  const data = getPartnerData(user?.partnerId || '');
 
   const readyForReview = data.applications.filter(a => a.status === 'Ready for partner' || a.status === 'Sent to partner').length;
   const needsInfo = data.applications.filter(a => a.partnerDecision === 'More information needed').length;

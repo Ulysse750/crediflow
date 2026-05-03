@@ -11,11 +11,11 @@ import { ArrowRight, FileText, Users, Upload, CheckCircle, CreditCard, MessageSq
 
 export default function BorrowerDashboard() {
   const { user } = useDemoAuth();
-  const data = getBorrowerData(user.borrowerId);
+  const data = getBorrowerData(user?.borrowerId || '');
   const app = data.applications[0];
   const profileComplete = !!data.borrower;
-  const docsUploaded = data.documents.filter(d => d.status !== 'Not uploaded').length;
-  const totalDocs = data.documents.length;
+  const docsUploaded = (data.documents || []).filter(d => d.status !== 'Not uploaded').length;
+  const totalDocs = (data.documents || []).length;
   const consentDone = data.consent?.status === 'Accepted';
 
   const nextSteps = [];
@@ -27,7 +27,7 @@ export default function BorrowerDashboard() {
   return (
     <div className="space-y-6 max-w-5xl">
       <div>
-        <h1 className="text-2xl font-display font-bold">Welcome back, {data.borrower?.name}</h1>
+        <h1 className="text-2xl font-display font-bold">Welcome back, {data.borrower?.name || user?.name}</h1>
         <p className="text-sm text-muted-foreground mt-1">Your borrower portal overview</p>
       </div>
       <RoleScopeNote role="borrower" />
@@ -44,7 +44,7 @@ export default function BorrowerDashboard() {
         </Card>
         <Card className="p-4">
           <p className="text-xs text-muted-foreground">Documents</p>
-          <p className="text-lg font-bold mt-1">{docsUploaded}/{totalDocs}</p>
+          <p className="text-lg font-bold mt-1">{totalDocs > 0 ? `${docsUploaded}/${totalDocs}` : '—'}</p>
         </Card>
         <Card className="p-4">
           <p className="text-xs text-muted-foreground">Group</p>

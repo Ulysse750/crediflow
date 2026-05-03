@@ -12,7 +12,7 @@ import { Eye } from 'lucide-react';
 
 export default function PartnerApplications() {
   const { user } = useDemoAuth();
-  const data = getPartnerData(user.partnerId);
+  const data = getPartnerData(user?.partnerId || '');
   const [statusFilter, setStatusFilter] = useState('all');
 
   const filtered = statusFilter === 'all'

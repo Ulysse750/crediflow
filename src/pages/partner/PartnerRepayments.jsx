@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 
 export default function PartnerRepayments() {
   const { user } = useDemoAuth();
-  const { repayments } = getPartnerData(user.partnerId);
+  const { repayments } = getPartnerData(user?.partnerId || '');
 
   return (
     <div className="space-y-6">

@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export default function PartnerLoans() {
   const { user } = useDemoAuth();
-  const { loans } = getPartnerData(user.partnerId);
+  const { loans } = getPartnerData(user?.partnerId || '');
 
   return (
     <div className="space-y-6">

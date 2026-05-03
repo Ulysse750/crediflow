@@ -247,6 +247,7 @@ export const QUESTIONNAIRE_ANSWERS = {
 // ============================================================
 
 export function getBorrowerData(borrowerId) {
+  if (!borrowerId) return { borrower: null, applications: [], documents: [], consent: null, repayments: [], support: [], group: null, loans: [], questionnaire: null };
   const borrower = BORROWERS.find(b => b.id === borrowerId);
   const applications = APPLICATIONS.filter(a => a.borrowerId === borrowerId);
   const documents = DOCUMENTS.filter(d => d.borrowerId === borrowerId);
@@ -260,6 +261,7 @@ export function getBorrowerData(borrowerId) {
 }
 
 export function getPartnerData(partnerId) {
+  if (!partnerId) return { partner: null, applications: [], borrowers: [], groups: [], documents: [], loans: [], repayments: [], aiAnalyses: [] };
   const partner = PARTNERS.find(p => p.id === partnerId);
   const applications = APPLICATIONS.filter(a => a.partnerId === partnerId);
   const borrowerIds = [...new Set(applications.map(a => a.borrowerId))];

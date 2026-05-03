@@ -13,8 +13,8 @@ import { Save } from 'lucide-react';
 
 export default function BorrowerProfile() {
   const { user } = useDemoAuth();
-  const { borrower } = getBorrowerData(user.borrowerId);
-  const [form, setForm] = useState({ ...borrower });
+  const { borrower } = getBorrowerData(user?.borrowerId || '');
+  const [form, setForm] = useState({ ...(borrower || {}) });
 
   const handleSave = () => {
     toast.success('Profile saved in demo mode');
@@ -41,8 +41,12 @@ export default function BorrowerProfile() {
               <Input value={form.email || ''} onChange={(e) => update('email', e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>Province / City</Label>
-              <Input value={`${form.province}, ${form.city}`} onChange={(e) => update('province', e.target.value)} />
+              <Label>Province</Label>
+              <Input value={form.province || ''} onChange={(e) => update('province', e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label>City / Municipality</Label>
+              <Input value={form.city || ''} onChange={(e) => update('city', e.target.value)} />
             </div>
             <div className="space-y-2">
               <Label>Barangay</Label>

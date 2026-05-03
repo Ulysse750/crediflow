@@ -15,7 +15,7 @@ const TYPES = ['Application help', 'Group issue', 'Document issue', 'Repayment i
 
 export default function BorrowerSupport() {
   const { user } = useDemoAuth();
-  const { support } = getBorrowerData(user.borrowerId);
+  const { support } = getBorrowerData(user?.borrowerId || '');
   const [type, setType] = useState('');
   const [message, setMessage] = useState('');
 

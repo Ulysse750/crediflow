@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export default function PartnerGroups() {
   const { user } = useDemoAuth();
-  const { groups } = getPartnerData(user.partnerId);
+  const { groups } = getPartnerData(user?.partnerId || '');
 
   return (
     <div className="space-y-6">

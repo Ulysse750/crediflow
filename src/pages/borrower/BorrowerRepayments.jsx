@@ -9,7 +9,7 @@ import { CreditCard } from 'lucide-react';
 
 export default function BorrowerRepayments() {
   const { user } = useDemoAuth();
-  const { repayments, loans } = getBorrowerData(user.borrowerId);
+  const { repayments, loans } = getBorrowerData(user?.borrowerId || '');
 
   return (
     <div className="max-w-3xl space-y-6">

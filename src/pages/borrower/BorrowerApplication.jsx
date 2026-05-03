@@ -28,7 +28,7 @@ const ONBOARDING_STEPS = [
 
 export default function BorrowerApplication() {
   const { user } = useDemoAuth();
-  const data = getBorrowerData(user.borrowerId);
+  const data = getBorrowerData(user?.borrowerId || '');
   const { borrower } = data;
   const app = data.applications[0];
   const [form, setForm] = useState(app || {});

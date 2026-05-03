@@ -12,7 +12,7 @@ import { Users, Copy, UserPlus, Plus } from 'lucide-react';
 
 export default function BorrowerGroup() {
   const { user } = useDemoAuth();
-  const { group } = getBorrowerData(user.borrowerId);
+  const { group } = getBorrowerData(user?.borrowerId || '');
   const [joinCode, setJoinCode] = useState('');
 
   if (!group) {

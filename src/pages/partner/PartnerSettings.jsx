@@ -10,10 +10,10 @@ import { Save } from 'lucide-react';
 
 export default function PartnerSettings() {
   const { user } = useDemoAuth();
-  const [institution, setInstitution] = useState(user.institution || 'Bayan Rural Bank');
-  const [contact, setContact] = useState('Juan Dela Cruz');
-  const [email, setEmail] = useState('juan@bayanrb.com');
-  const [region, setRegion] = useState('Visayas');
+  const [institution, setInstitution] = useState(user.institution || '');
+  const [contact, setContact] = useState(user.name || '');
+  const [email, setEmail] = useState(user.email || '');
+  const [region, setRegion] = useState('');
 
   return (
     <div className="max-w-3xl space-y-6">

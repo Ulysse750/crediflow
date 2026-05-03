@@ -2,6 +2,7 @@ import React from 'react';
 import { getAdminData } from '@/lib/mockData';
 import RoleScopeNote from '@/components/shared/RoleScopeNote';
 import MetricCard from '@/components/shared/MetricCard';
+import { Link } from 'react-router-dom';
 import { Users, UsersRound, FileText, Clock, CheckCircle, XCircle, CreditCard, AlertTriangle, MessageSquare, Sparkles, Building2 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -42,6 +43,7 @@ export default function AdminDashboard() {
         <MetricCard label="High Risk Flags" value={highRisk} icon={AlertTriangle} color="text-red-500" />
         <MetricCard label="AI Reviews Pending" value={aiPending} icon={Sparkles} color="text-amber-500" />
         <MetricCard label="AI Reviews Done" value={aiCompleted} icon={Sparkles} color="text-emerald-600" />
+        <MetricCard label="Partners" value={d.partners.length} icon={Building2} />
       </div>
     </div>
   );

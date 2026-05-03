@@ -11,7 +11,7 @@ import { Sparkles, AlertTriangle } from 'lucide-react';
 
 export default function PartnerAIReviews() {
   const { user } = useDemoAuth();
-  const { aiAnalyses } = getPartnerData(user.partnerId);
+  const { aiAnalyses } = getPartnerData(user?.partnerId || '');
 
   return (
     <div className="space-y-6">

@@ -35,7 +35,7 @@ function DataRow({ label, value }) {
 export default function PartnerApplicationDetail() {
   const { id } = useParams();
   const { user } = useDemoAuth();
-  const data = getPartnerData(user.partnerId);
+  const data = getPartnerData(user?.partnerId || '');
   const app = data.applications.find(a => a.id === id);
   const [note, setNote] = useState('');
 

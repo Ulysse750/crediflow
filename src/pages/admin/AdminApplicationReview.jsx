@@ -85,7 +85,7 @@ export default function AdminApplicationReview() {
               <div><p className="font-medium">{d.type}</p></div>
               <div className="flex items-center gap-2">
                 <StatusChip status={d.status} />
-                <StatusChip status={d.aiStatus || 'N/A'} />
+                {d.aiStatus && <StatusChip status={d.aiStatus} />}
               </div>
             </div>
           ))}
@@ -98,8 +98,8 @@ export default function AdminApplicationReview() {
           <CardHeader className="pb-3"><CardTitle className="text-base font-display flex items-center gap-2"><Sparkles className="w-4 h-4 text-secondary" /> AI Analysis</CardTitle></CardHeader>
           <CardContent className="space-y-3 text-sm">
             <p className="font-medium">Status: <StatusChip status={ai.status} /></p>
-            <p>{ai.reviewerSummary}</p>
-            {ai.humanReviewRequired && <StatusChip status="Human review required" />}
+            <p>{ai.partnerSummary || ai.profileSummary}</p>
+            {ai.humanReviewRequired && <span className="inline-flex items-center gap-1 text-xs text-amber-700 font-medium bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">⚠ Human review required</span>}
             <ComplianceDisclaimer variant="ai" />
           </CardContent>
         </Card>

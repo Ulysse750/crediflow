@@ -22,7 +22,7 @@ const CONSENT_ITEMS = [
 
 export default function BorrowerConsent() {
   const { user } = useDemoAuth();
-  const { consent } = getBorrowerData(user.borrowerId);
+  const { consent } = getBorrowerData(user?.borrowerId || '');
   const [checks, setChecks] = useState(CONSENT_ITEMS.map(() => consent?.status === 'Accepted'));
   const allChecked = checks.every(Boolean);
 
