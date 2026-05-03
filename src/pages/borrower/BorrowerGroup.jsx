@@ -41,8 +41,9 @@ export default function BorrowerGroup() {
     <div className="max-w-3xl space-y-6">
       <PageHeader title="My Group" description="Your group membership details" />
 
-      <div className="p-3 rounded-lg bg-muted/50 border border-border/50 text-xs text-muted-foreground">
-        Group members cannot see one another's private loan or repayment details.
+      <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50 border border-border/50 text-xs text-muted-foreground">
+        <span className="shrink-0">🔒</span>
+        <p>Group members can see each other's first names and member count only. Individual loan amounts, repayment records, and income details are private and are not shared with other group members.</p>
       </div>
 
       <Card>

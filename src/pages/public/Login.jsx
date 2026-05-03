@@ -3,16 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useDemoAuth } from '@/lib/demoAuth';
 import PublicHeader from '@/components/layout/PublicHeader';
 import Footer from '@/components/layout/Footer';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, User, Building2, Shield } from 'lucide-react';
+import { Eye, EyeOff, User, Building2, Shield, ChevronDown, ChevronUp } from 'lucide-react';
 
 const DEMO_ACCOUNTS = [
-  { label: 'Borrower', email: 'borrower@crediflow.demo', password: 'borrower123', name: 'Maria Santos', icon: User, color: 'bg-secondary/10 text-secondary border-secondary/20' },
-  { label: 'Partner', email: 'partner@crediflow.demo', password: 'partner123', name: 'Bayan Rural Bank', icon: Building2, color: 'bg-primary/10 text-primary border-primary/20' },
-  { label: 'Admin', email: 'admin@crediflow.demo', password: 'admin123', name: 'CrediFlow Admin', icon: Shield, color: 'bg-accent/10 text-accent border-accent/20' },
+  { label: 'Borrower — Maria Santos', email: 'borrower@crediflow.demo', password: 'borrower123', icon: User, color: 'bg-secondary/10 text-secondary border-secondary/20', role: 'borrower' },
+  { label: 'Borrower — Jose Reyes', email: 'borrower2@crediflow.demo', password: 'borrower123', icon: User, color: 'bg-secondary/10 text-secondary border-secondary/20', role: 'borrower' },
+  { label: 'Partner — Bayan Rural Bank', email: 'partner@crediflow.demo', password: 'partner123', icon: Building2, color: 'bg-primary/10 text-primary border-primary/20', role: 'partner' },
+  { label: 'Partner — Kapwa Microfinance', email: 'partner2@crediflow.demo', password: 'partner123', icon: Building2, color: 'bg-primary/10 text-primary border-primary/20', role: 'partner' },
+  { label: 'Partner — Unity Cooperative', email: 'partner3@crediflow.demo', password: 'partner123', icon: Building2, color: 'bg-primary/10 text-primary border-primary/20', role: 'partner' },
+  { label: 'Admin — CrediFlow', email: 'admin@crediflow.demo', password: 'admin123', icon: Shield, color: 'bg-accent/10 text-accent border-accent/20', role: 'admin' },
 ];
 
 export default function Login() {
@@ -21,6 +24,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showAccounts, setShowAccounts] = useState(true);
   const { login } = useDemoAuth();
   const navigate = useNavigate();
 
@@ -50,26 +54,41 @@ export default function Login() {
     <div className="min-h-screen flex flex-col bg-background">
       <PublicHeader />
       <div className="flex-1 flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md space-y-6">
+        <div className="w-full max-w-md space-y-5">
           <div className="text-center">
-            <h1 className="text-2xl font-display font-bold text-foreground">Welcome to CrediFlow</h1>
-            <p className="text-sm text-muted-foreground mt-1">Sign in to your demo account</p>
+            <h1 className="text-2xl font-display font-bold text-foreground">Sign in to CrediFlow</h1>
+            <p className="text-sm text-muted-foreground mt-1">Demo environment — use a demo account below</p>
           </div>
 
-          {/* Demo account cards */}
-          <div className="grid grid-cols-3 gap-2">
-            {DEMO_ACCOUNTS.map((a) => (
+          {/* Demo accounts */}
+          <Card>
+            <CardContent className="pt-4 pb-4">
               <button
-                key={a.label}
-                onClick={() => fillCredentials(a)}
-                className={`p-3 rounded-xl border text-center transition-all hover:shadow-md ${a.color}`}
+                className="flex items-center justify-between w-full text-sm font-medium text-foreground mb-3"
+                onClick={() => setShowAccounts(v => !v)}
               >
-                <a.icon className="w-5 h-5 mx-auto mb-1.5" />
-                <p className="text-xs font-semibold">{a.label}</p>
-                <p className="text-[10px] opacity-70 mt-0.5 truncate">{a.name}</p>
+                <span>Demo accounts — click to fill login</span>
+                {showAccounts ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </button>
-            ))}
-          </div>
+              {showAccounts && (
+                <div className="space-y-1.5">
+                  {DEMO_ACCOUNTS.map((a) => (
+                    <button
+                      key={a.email}
+                      onClick={() => fillCredentials(a)}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-all hover:shadow-sm ${a.color}`}
+                    >
+                      <a.icon className="w-4 h-4 shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold truncate">{a.label}</p>
+                        <p className="text-[10px] opacity-60 truncate">{a.email}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           <Card>
             <CardContent className="pt-6">

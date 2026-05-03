@@ -11,12 +11,13 @@ import { toast } from 'sonner';
 import { CheckCircle } from 'lucide-react';
 
 const CONSENT_ITEMS = [
-  'I understand CrediFlow is not directly offering me a loan.',
-  'I understand my application may be shared with a licensed lending partner.',
-  'I understand the licensed partner makes the final credit decision.',
-  'I consent to processing of my information for application review.',
-  'I consent to communications about my application.',
-  'I understand group participation rules.',
+  'I understand that CrediFlow is not a lender and does not directly provide loans.',
+  'I understand that my application and supporting documents will be shared with a licensed lending partner for review. I consent to this sharing.',
+  'I understand that the licensed lending partner — not CrediFlow — makes all final credit decisions.',
+  'I consent to CrediFlow processing my personal and financial information solely for the purpose of preparing and routing my loan application.',
+  'I consent to receiving communications about my application status from CrediFlow and the assigned lending partner.',
+  'I confirm that the information I have provided is accurate and complete to the best of my knowledge.',
+  'I understand that submitting inaccurate information may result in my application being declined.',
 ];
 
 export default function BorrowerConsent() {
@@ -53,7 +54,11 @@ export default function BorrowerConsent() {
 
       <Card>
         <CardContent className="pt-6 space-y-4">
-          <p className="text-sm font-medium">Please review each item:</p>
+          <div className="flex items-start gap-2 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800">
+            <span className="shrink-0 font-bold">!</span>
+            <p>You must accept all items below before your application can be submitted and shared with a lending partner. Consent is required for data sharing. You can withdraw consent at any time by contacting support — this will pause your application.</p>
+          </div>
+          <p className="text-sm font-medium">Please read and confirm each item:</p>
           {CONSENT_ITEMS.map((item, i) => (
             <label key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
               <Checkbox checked={checks[i]} onCheckedChange={() => toggleCheck(i)} className="mt-0.5" />
