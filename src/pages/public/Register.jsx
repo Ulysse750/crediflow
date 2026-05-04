@@ -19,7 +19,7 @@ export default function Register() {
   useEffect(() => {
     // If already logged in, redirect to dashboard
     base44.auth.me().then(user => {
-      if (user) window.location.replace('/borrower');
+      if (user) window.location.replace('/auth-redirect');
     }).catch(() => {});
   }, []);
 
@@ -27,7 +27,7 @@ export default function Register() {
     if (!consent) return;
     // Redirect into Base44 auth. After sign-up/login, user lands on /borrower.
     // DashboardLayout will set their role to 'borrower' if not yet assigned.
-    base44.auth.redirectToLogin('/borrower');
+    base44.auth.redirectToLogin('/auth-redirect');
   };
 
   return (

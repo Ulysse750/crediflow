@@ -70,8 +70,9 @@ export default function DashboardLayout({ role }) {
           to: user.email,
           subject: 'Welcome to CrediFlow — your account is ready',
           body: `Hi ${user.full_name || 'there'},\n\nWelcome to CrediFlow! Your borrower account has been created successfully.\n\nTo get started, please complete your onboarding:\n1. Fill in your borrower profile\n2. Complete the alternative-data questionnaire\n3. Upload your required documents\n4. Accept the data-sharing consent\n5. Join or create a borrower group\n\nOnce all steps are done, you can submit your loan application.\n\nLog in at any time to continue:\nhttps://crediflow.base44.app\n\n──\nCrediFlow does not provide loans directly. Loan decisions are made by licensed lending partners. No loan approval is guaranteed.\n\nCrediFlow Team`,
-        }).catch(() => {}); // fire-and-forget, don't block the user
+        }).catch(() => {});
         setAssigning(false);
+        navigate('/borrower', { replace: true });
       }).catch(() => setAssigning(false));
       return;
     }
