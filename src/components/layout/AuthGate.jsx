@@ -14,7 +14,7 @@ export default function AuthGate({ role, children }) {
   }
 
   if (!user) {
-    redirectToLogin();
+    window.location.replace('/login');
     return null;
   }
 

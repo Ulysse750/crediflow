@@ -78,7 +78,7 @@ export default function DashboardLayout({ role }) {
 
     // Not logged in → login
     if (!user) {
-      base44.auth.redirectToLogin(window.location.pathname);
+      navigate('/login', { replace: true });
       return;
     }
 
@@ -98,7 +98,7 @@ export default function DashboardLayout({ role }) {
   }
 
   if (!user) {
-    base44.auth.redirectToLogin(window.location.pathname);
+    navigate('/login', { replace: true });
     return null;
   }
 
