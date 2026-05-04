@@ -69,16 +69,14 @@ export default function Home() {
               CrediFlow helps trusted borrower groups apply for loans through licensed lending partners in the Philippines and Southeast Asia.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/register">
-                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-semibold gap-2 px-6">
-                  Create account <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold gap-2 px-6">
-                  Sign in
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-semibold gap-2 px-6"
+                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
+                Create account <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold gap-2 px-6"
+                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
+                Sign in
+              </Button>
             </div>
           </div>
         </div>
