@@ -36,10 +36,10 @@ export default function Register() {
       <div className="flex-1 flex items-start justify-center py-10 px-4">
         <div className="w-full max-w-lg">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-display font-bold text-foreground">Create your borrower account</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Free to join. Apply for loans through licensed lending partners.
-            </p>
+           <h1 className="text-2xl font-display font-bold text-foreground">Join CrediFlow</h1>
+           <p className="text-sm text-muted-foreground mt-1">
+             Create your borrower account to apply for loans through licensed lending partners.
+           </p>
           </div>
 
           <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-5">
@@ -96,11 +96,11 @@ export default function Register() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-4">
-            Already have an account?{' '}
-            <Link to="/login" className="text-secondary font-medium hover:underline">Sign in</Link>
+            Already registered?{' '}
+            <Link to="/login" className="text-secondary font-medium hover:underline">Sign in here</Link>
           </p>
           <p className="text-center text-xs text-muted-foreground/60 mt-2">
-            Partner or admin? Your account is provided directly by CrediFlow.
+            Partner institutions and admins are invited directly by CrediFlow.
           </p>
         </div>
       </div>

@@ -26,9 +26,9 @@ export default function Login() {
             <p className="text-sm text-muted-foreground mt-1">Use your registered email address</p>
           </div>
           <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Click below to sign in securely. You'll be prompted for your email and password.
-            </p>
+            <div className="p-3 bg-secondary/5 border border-secondary/20 rounded-lg text-sm text-secondary font-medium">
+              Sign in with your registered email address to access your account.
+            </div>
             <Button
               className="w-full bg-primary hover:bg-primary/90 gap-2"
               onClick={() => base44.auth.redirectToLogin('/')}
@@ -36,12 +36,16 @@ export default function Login() {
               <LogIn className="w-4 h-4" /> Sign in
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Borrower?{' '}
-            <Link to="/register" className="text-secondary font-medium hover:underline">Create a free account</Link>
-          </p>
-          <p className="text-xs text-muted-foreground/60">
-            Partner and admin accounts are provided by CrediFlow directly.
+          <div className="bg-muted/40 rounded-lg p-3 border border-border/50">
+            <p className="text-sm font-medium text-foreground mb-2">New to CrediFlow?</p>
+            <Link to="/register">
+              <Button variant="outline" className="w-full gap-2">
+                Create your account
+              </Button>
+            </Link>
+          </div>
+          <p className="text-xs text-muted-foreground/60 text-center">
+            Partner and admin accounts are invited directly by CrediFlow.
           </p>
         </div>
       </div>
