@@ -70,11 +70,11 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-semibold gap-2 px-6"
-                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
+                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/auth-redirect')}>
                 Create account <ArrowRight className="w-4 h-4" />
               </Button>
               <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold gap-2 px-6"
-                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
+                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/auth-redirect')}>
                 Sign in
               </Button>
             </div>
