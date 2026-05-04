@@ -52,8 +52,6 @@ import AdminRepayments from '@/pages/admin/AdminRepayments';
 import AdminSupport from '@/pages/admin/AdminSupport';
 import AdminRiskFlags from '@/pages/admin/AdminRiskFlags';
 import AdminCompliance from '@/pages/admin/AdminCompliance';
-import AdminMVPReadiness from '@/pages/admin/AdminMVPReadiness';
-import AdminDataModel from '@/pages/admin/AdminDataModel';
 import AdminSettings from '@/pages/admin/AdminSettings';
 
 function App() {
@@ -112,8 +110,6 @@ function App() {
             <Route path="/admin/support" element={<AdminSupport />} />
             <Route path="/admin/risk-flags" element={<AdminRiskFlags />} />
             <Route path="/admin/compliance" element={<AdminCompliance />} />
-            <Route path="/admin/mvp-readiness" element={<AdminMVPReadiness />} />
-            <Route path="/admin/data-model" element={<AdminDataModel />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
 

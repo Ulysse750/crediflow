@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/useAuth';
+import { base44 } from '@/api/base44Client';
 import Logo from '@/components/shared/Logo';
 import { Button } from '@/components/ui/button';
 import { LogOut, Menu, ChevronRight } from 'lucide-react';
@@ -46,8 +47,6 @@ const ADMIN_NAV = [
   { label: 'Support', path: '/admin/support', icon: '💬' },
   { label: 'Risk Flags', path: '/admin/risk-flags', icon: '⚠️' },
   { label: 'Compliance', path: '/admin/compliance', icon: '🛡️' },
-  { label: 'MVP Readiness', path: '/admin/mvp-readiness', icon: '🚀' },
-  { label: 'Data Model', path: '/admin/data-model', icon: '🗄️' },
   { label: 'Settings', path: '/admin/settings', icon: '⚙️' },
 ];
 
@@ -56,9 +55,36 @@ const NAV_MAP = { borrower: BORROWER_NAV, partner: PARTNER_NAV, admin: ADMIN_NAV
 export default function DashboardLayout({ role }) {
   const { user, loading, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [assigning, setAssigning] = useState(false);
 
-  if (loading) {
+  useEffect(() => {
+    if (loading || !user) return;
+
+    // New borrower: no role yet — auto-assign 'borrower' and stay on /borrower
+    if (!user.role && role === 'borrower') {
+      setAssigning(true);
+      base44.auth.updateMe({ role: 'borrower' }).then(() => {
+        setAssigning(false);
+      }).catch(() => setAssigning(false));
+      return;
+    }
+
+    // Not logged in → login
+    if (!user) {
+      base44.auth.redirectToLogin(window.location.pathname);
+      return;
+    }
+
+    // Wrong portal → redirect to correct one
+    if (user.role && user.role !== role) {
+      const correctPath = user.role === 'borrower' ? '/borrower' : user.role === 'partner' ? '/partner' : '/admin';
+      navigate(correctPath, { replace: true });
+    }
+  }, [user, loading, role]);
+
+  if (loading || assigning) {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
@@ -67,14 +93,17 @@ export default function DashboardLayout({ role }) {
   }
 
   if (!user) {
-    window.location.href = '/login';
+    base44.auth.redirectToLogin(window.location.pathname);
     return null;
   }
 
-  if (user.role !== role) {
-    const correctPath = user.role === 'borrower' ? '/borrower' : user.role === 'partner' ? '/partner' : '/admin';
-    window.location.href = correctPath;
-    return null;
+  // If user has a role mismatch, show spinner while redirect happens
+  if (user.role && user.role !== role) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
+      </div>
+    );
   }
 
   const navItems = NAV_MAP[role] || [];
