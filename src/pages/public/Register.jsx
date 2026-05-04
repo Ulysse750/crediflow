@@ -27,7 +27,7 @@ export default function Register() {
     if (!consent) return;
     // Redirect into Base44 auth. After sign-up/login, user lands on /borrower.
     // DashboardLayout will set their role to 'borrower' if not yet assigned.
-    base44.auth.redirectToLogin('/auth-redirect');
+    base44.auth.redirectToLogin('/');
   };
 
   return (

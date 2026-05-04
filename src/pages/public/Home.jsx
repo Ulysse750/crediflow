@@ -30,6 +30,13 @@ export default function Home() {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
+    // If access_token is in the URL, hard-reload without it so the SDK picks it up from localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('access_token')) {
+      window.location.href = window.location.origin + '/';
+      return;
+    }
+
     base44.auth.me().then(user => {
       if (!user) { setChecking(false); return; }
       if (user.role === 'partner') window.location.href = '/partner';

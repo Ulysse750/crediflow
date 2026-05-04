@@ -31,7 +31,7 @@ export default function Login() {
             </p>
             <Button
               className="w-full bg-primary hover:bg-primary/90 gap-2"
-              onClick={() => base44.auth.redirectToLogin('/auth-redirect')}
+              onClick={() => base44.auth.redirectToLogin('/')}
             >
               <LogIn className="w-4 h-4" /> Sign in
             </Button>
