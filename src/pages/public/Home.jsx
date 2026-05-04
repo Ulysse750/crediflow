@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import PublicHeader from '@/components/layout/PublicHeader';
@@ -27,14 +27,24 @@ const partnerBenefits = [
 ];
 
 export default function Home() {
+  const [checking, setChecking] = useState(true);
+
   useEffect(() => {
     base44.auth.me().then(user => {
-      if (!user) return;
+      if (!user) { setChecking(false); return; }
       if (user.role === 'partner') window.location.replace('/partner');
       else if (user.role === 'admin') window.location.replace('/admin');
       else window.location.replace('/borrower');
-    }).catch(() => {});
+    }).catch(() => setChecking(false));
   }, []);
+
+  if (checking) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
