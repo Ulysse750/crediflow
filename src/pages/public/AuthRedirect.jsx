@@ -3,32 +3,30 @@ import { base44 } from '@/api/base44Client';
 
 export default function AuthRedirect() {
   useEffect(() => {
-    // The SDK client may have been initialized before the new access_token
-    // arrived in the URL. app-params.js stores it to localStorage, so we do
-    // a hard reload (without the token in the URL) to reinitialize the SDK
-    // with the freshly stored token.
+    // If access_token is in the URL, app-params.js has already stored it to
+    // localStorage. We must do a full hard reload so the base44 SDK client
+    // re-initialises with that token (it's a singleton created at import time).
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('access_token')) {
-      urlParams.delete('access_token');
-      const cleanUrl = '/auth-redirect' + (urlParams.toString() ? `?${urlParams.toString()}` : '');
-      window.location.replace(cleanUrl);
+      // Reload the page without the token in the URL — SDK will pick it up from localStorage
+      window.location.href = window.location.origin + '/auth-redirect';
       return;
     }
 
     base44.auth.me().then(user => {
       if (!user) {
-        window.location.replace('/');
+        window.location.href = '/';
         return;
       }
       if (user.role === 'partner') {
-        window.location.replace('/partner');
+        window.location.href = '/partner';
       } else if (user.role === 'admin') {
-        window.location.replace('/admin');
+        window.location.href = '/admin';
       } else {
-        window.location.replace('/borrower');
+        window.location.href = '/borrower';
       }
     }).catch(() => {
-      window.location.replace('/');
+      window.location.href = '/';
     });
   }, []);
 

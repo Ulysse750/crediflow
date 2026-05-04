@@ -32,9 +32,9 @@ export default function Home() {
   useEffect(() => {
     base44.auth.me().then(user => {
       if (!user) { setChecking(false); return; }
-      if (user.role === 'partner') window.location.replace('/partner');
-      else if (user.role === 'admin') window.location.replace('/admin');
-      else window.location.replace('/borrower');
+      if (user.role === 'partner') window.location.href = '/partner';
+      else if (user.role === 'admin') window.location.href = '/admin';
+      else window.location.href = '/borrower';
     }).catch(() => setChecking(false));
   }, []);
 
@@ -70,11 +70,11 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-semibold gap-2 px-6"
-                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/auth-redirect')}>
+                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
                 Create account <ArrowRight className="w-4 h-4" />
               </Button>
               <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold gap-2 px-6"
-                onClick={() => base44.auth.redirectToLogin(window.location.origin + '/auth-redirect')}>
+                onClick={() => base44.auth.redirectToLogin('/auth-redirect')}>
                 Sign in
               </Button>
             </div>
