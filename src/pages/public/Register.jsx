@@ -19,7 +19,7 @@ export default function Register() {
   useEffect(() => {
     // If already logged in, redirect to dashboard
     base44.auth.me().then(user => {
-      if (user) window.location.replace('/auth-redirect');
+      if (user) window.location.replace('/');
     }).catch(() => {});
   }, []);
 
