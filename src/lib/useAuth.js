@@ -1,0 +1,19 @@
+import { useState, useEffect } from 'react';
+import { base44 } from '@/api/base44Client';
+
+// Central auth hook — replaces useDemoAuth everywhere
+export function useAuth() {
+  const [user, setUser] = useState(undefined); // undefined = loading, null = not logged in
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    base44.auth.me()
+      .then(u => { setUser(u); setLoading(false); })
+      .catch(() => { setUser(null); setLoading(false); });
+  }, []);
+
+  const logout = () => base44.auth.logout('/');
+  const redirectToLogin = (next) => base44.auth.redirectToLogin(next || window.location.pathname);
+
+  return { user, loading, logout, redirectToLogin, isAuthenticated: !!user };
+}

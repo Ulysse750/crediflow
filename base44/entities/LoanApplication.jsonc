@@ -1,0 +1,90 @@
+{
+  "name": "LoanApplication",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "groupId": {
+      "type": "string"
+    },
+    "partnerProfileId": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "repaymentPeriod": {
+      "type": "string"
+    },
+    "repaymentFrequency": {
+      "type": "string"
+    },
+    "incomeSource": {
+      "type": "string"
+    },
+    "existingDebt": {
+      "type": "string"
+    },
+    "existingDebtDetails": {
+      "type": "string"
+    },
+    "repaymentSource": {
+      "type": "string"
+    },
+    "additionalExplanation": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Needs more information",
+        "Under CrediFlow review",
+        "Ready for partner",
+        "Sent to partner",
+        "Closed"
+      ],
+      "default": "Draft"
+    },
+    "partnerDecision": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "More information needed",
+        "Disbursed"
+      ],
+      "default": "Pending"
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "consentGiven": {
+      "type": "boolean",
+      "default": false
+    },
+    "submittedAt": {
+      "type": "string"
+    },
+    "adminNotes": {
+      "type": "string"
+    },
+    "partnerNotes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "borrowerEmail"
+  ]
+}

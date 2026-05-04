@@ -1,0 +1,52 @@
+{
+  "name": "BorrowerGroup",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "leaderEmail": {
+      "type": "string"
+    },
+    "memberEmails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "location": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Forming",
+        "Active",
+        "Inactive",
+        "Closed"
+      ],
+      "default": "Forming"
+    },
+    "partnerProfileId": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "readiness": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Incomplete",
+        "Ready"
+      ],
+      "default": "Pending"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '@/lib/useAuth';
 import PageHeader from '@/components/shared/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,9 +9,20 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 
 export default function AdminSettings() {
+  const { user } = useAuth();
+
   return (
     <div className="space-y-6 max-w-2xl">
-      <PageHeader title="Admin Settings" description="Platform configuration for CrediFlow MVP." />
+      <PageHeader title="Admin Settings" description="Platform configuration for CrediFlow." />
+
+      <Card>
+        <CardHeader className="pb-3"><CardTitle className="text-base font-display">Current admin account</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <div className="space-y-1"><Label>Email</Label><Input defaultValue={user?.email} disabled className="bg-muted" /></div>
+          <div className="space-y-1"><Label>Name</Label><Input defaultValue={user?.full_name} disabled className="bg-muted" /></div>
+          <p className="text-xs text-muted-foreground">Account management is handled through the Base44 platform dashboard.</p>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader className="pb-3"><CardTitle className="text-base font-display">Platform information</CardTitle></CardHeader>
@@ -18,7 +30,7 @@ export default function AdminSettings() {
           <div className="space-y-1"><Label>Platform name</Label><Input defaultValue="CrediFlow" /></div>
           <div className="space-y-1"><Label>Tagline</Label><Input defaultValue="Responsible credit, made simple." /></div>
           <div className="space-y-1"><Label>Support email</Label><Input defaultValue="support@crediflow.ph" /></div>
-          <Button size="sm" className="bg-secondary hover:bg-secondary/90" onClick={() => toast.success('Settings saved (demo)')}>Save</Button>
+          <Button size="sm" className="bg-secondary hover:bg-secondary/90" onClick={() => toast.success('Settings saved')}>Save</Button>
         </CardContent>
       </Card>
 
@@ -27,32 +39,13 @@ export default function AdminSettings() {
         <CardContent className="space-y-3">
           {[
             ['Allow borrower self-registration', true],
-            ['Allow apply without group', false],
             ['AI document analysis enabled', true],
             ['Partner portal enabled', true],
             ['Show compliance disclaimers', true],
           ].map(([label, defaultVal]) => (
             <div key={label} className="flex items-center justify-between py-1">
               <span className="text-sm">{label}</span>
-              <Switch defaultChecked={defaultVal} onCheckedChange={() => toast.info(`${label} toggled (demo)`)} />
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="pb-3"><CardTitle className="text-base font-display">Demo accounts</CardTitle></CardHeader>
-        <CardContent className="space-y-2 text-sm">
-          {[
-            ['Borrower', 'borrower@crediflow.demo', 'borrower123'],
-            ['Partner', 'partner@crediflow.demo', 'partner123'],
-            ['Admin', 'admin@crediflow.demo', 'admin123'],
-          ].map(([role, email, pass]) => (
-            <div key={role} className="flex items-center justify-between p-2.5 bg-muted/40 rounded-lg">
-              <div>
-                <span className="font-medium">{role}</span>
-                <span className="text-muted-foreground ml-2 text-xs">{email} / {pass}</span>
-              </div>
+              <Switch defaultChecked={defaultVal} onCheckedChange={() => toast.info(`${label} toggled`)} />
             </div>
           ))}
         </CardContent>

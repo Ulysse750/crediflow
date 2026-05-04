@@ -1,0 +1,116 @@
+{
+  "name": "BorrowerProfile",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "Male",
+        "Female",
+        "Non-binary",
+        "Prefer not to say"
+      ]
+    },
+    "civilStatus": {
+      "type": "string",
+      "enum": [
+        "Single",
+        "Married",
+        "Widowed",
+        "Separated",
+        "Cohabiting"
+      ]
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "barangay": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "incomeSource": {
+      "type": "string"
+    },
+    "monthlyIncome": {
+      "type": "string"
+    },
+    "householdSize": {
+      "type": "number"
+    },
+    "dependents": {
+      "type": "number"
+    },
+    "educationLevel": {
+      "type": "string"
+    },
+    "employmentType": {
+      "type": "string"
+    },
+    "businessType": {
+      "type": "string"
+    },
+    "yearsInWork": {
+      "type": "string"
+    },
+    "mobileWallet": {
+      "type": "string"
+    },
+    "hasBankAccount": {
+      "type": "boolean"
+    },
+    "hasExistingLoans": {
+      "type": "string"
+    },
+    "emergencyContact": {
+      "type": "string"
+    },
+    "emergencyPhone": {
+      "type": "string"
+    },
+    "emergencyRelation": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "profileCompletion": {
+      "type": "number",
+      "default": 0
+    },
+    "questionnaireCompletion": {
+      "type": "number",
+      "default": 0
+    },
+    "documentsCompletion": {
+      "type": "number",
+      "default": 0
+    },
+    "consentCompletion": {
+      "type": "number",
+      "default": 0
+    },
+    "groupCompletion": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": []
+}

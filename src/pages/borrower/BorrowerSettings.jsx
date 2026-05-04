@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDemoAuth } from '@/lib/demoAuth';
+import { useAuth } from '@/lib/useAuth';
+import { base44 } from '@/api/base44Client';
 import PageHeader from '@/components/shared/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,11 +11,17 @@ import { toast } from 'sonner';
 import { Save } from 'lucide-react';
 
 export default function BorrowerSettings() {
-  const { user } = useDemoAuth();
-  const [displayName, setDisplayName] = useState(user.name);
-  const [notifEmail, setNotifEmail] = useState(user.email || 'maria@example.com');
+  const { user } = useAuth();
   const [channel, setChannel] = useState('email');
   const [language, setLanguage] = useState('English');
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    await base44.auth.updateMe({ notificationChannel: channel, preferredLanguage: language });
+    setSaving(false);
+    toast.success('Settings saved');
+  };
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -24,11 +31,11 @@ export default function BorrowerSettings() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Display Name</Label>
-              <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+              <Input value={user?.full_name || ''} disabled className="bg-muted" />
             </div>
             <div className="space-y-2">
-              <Label>Notification Email</Label>
-              <Input value={notifEmail} onChange={(e) => setNotifEmail(e.target.value)} />
+              <Label>Email</Label>
+              <Input value={user?.email || ''} disabled className="bg-muted" />
             </div>
             <div className="space-y-2">
               <Label>Notification Channel</Label>
@@ -53,12 +60,8 @@ export default function BorrowerSettings() {
               </Select>
             </div>
           </div>
-          <div className="pt-2 space-y-2">
-            <Label>Password / Security</Label>
-            <p className="text-xs text-muted-foreground">Password change functionality will be available in production.</p>
-          </div>
-          <Button className="gap-2 bg-secondary hover:bg-secondary/90" onClick={() => toast.success('Settings saved (demo)')}>
-            <Save className="w-4 h-4" /> Save Settings
+          <Button className="gap-2 bg-secondary hover:bg-secondary/90" onClick={handleSave} disabled={saving}>
+            <Save className="w-4 h-4" /> {saving ? 'Saving…' : 'Save Settings'}
           </Button>
         </CardContent>
       </Card>

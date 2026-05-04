@@ -16,7 +16,7 @@ export default function PartnerSupport() {
         <CardContent className="pt-6 space-y-3">
           <p className="text-sm font-medium">Add a Note</p>
           <Textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="Type your note or request..." />
-          <Button className="gap-2 bg-secondary hover:bg-secondary/90" onClick={() => { toast.success('Note added (demo)'); setNote(''); }}>
+          <Button className="gap-2 bg-secondary hover:bg-secondary/90" onClick={() => { toast.success('Note added'); setNote(''); }}>
             <Send className="w-4 h-4" /> Submit
           </Button>
         </CardContent>

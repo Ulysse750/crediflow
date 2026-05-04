@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation, Navigate } from 'react-router-dom';
-import { useDemoAuth } from '@/lib/demoAuth';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useAuth } from '@/lib/useAuth';
 import Logo from '@/components/shared/Logo';
 import { Button } from '@/components/ui/button';
-import { LogOut, Menu, X, ChevronRight } from 'lucide-react';
+import { LogOut, Menu, ChevronRight } from 'lucide-react';
 
 const BORROWER_NAV = [
   { label: 'Dashboard', path: '/borrower', icon: '📊' },
@@ -54,13 +54,27 @@ const ADMIN_NAV = [
 const NAV_MAP = { borrower: BORROWER_NAV, partner: PARTNER_NAV, admin: ADMIN_NAV };
 
 export default function DashboardLayout({ role }) {
-  const { user, logout } = useDemoAuth();
+  const { user, loading, logout } = useAuth();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!user || user.role !== role) {
-    const correctPath = user ? `/${user.role}` : '/login';
-    return <Navigate to={correctPath} replace />;
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    window.location.href = '/login';
+    return null;
+  }
+
+  if (user.role !== role) {
+    const correctPath = user.role === 'borrower' ? '/borrower' : user.role === 'partner' ? '/partner' : '/admin';
+    window.location.href = correctPath;
+    return null;
   }
 
   const navItems = NAV_MAP[role] || [];
@@ -93,7 +107,7 @@ export default function DashboardLayout({ role }) {
         })}
       </nav>
       <div className="p-4 border-t border-sidebar-border">
-        <div className="text-xs text-sidebar-foreground/60 mb-3 truncate">{user.name || user.email}</div>
+        <div className="text-xs text-sidebar-foreground/60 mb-3 truncate">{user.full_name || user.email}</div>
         <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50" onClick={logout}>
           <LogOut className="w-4 h-4" /> Logout
         </Button>
@@ -103,12 +117,10 @@ export default function DashboardLayout({ role }) {
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-      {/* Desktop sidebar */}
       <aside className="hidden lg:flex w-60 bg-sidebar flex-col border-r border-sidebar-border shrink-0">
         <SidebarContent />
       </aside>
 
-      {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
@@ -118,7 +130,6 @@ export default function DashboardLayout({ role }) {
         </div>
       )}
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <header className="h-14 border-b border-border bg-card flex items-center px-4 gap-3 shrink-0">
           <button className="lg:hidden p-1.5 hover:bg-muted rounded-md" onClick={() => setSidebarOpen(true)}>

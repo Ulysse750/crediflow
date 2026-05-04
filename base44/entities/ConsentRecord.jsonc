@@ -1,0 +1,46 @@
+{
+  "name": "ConsentRecord",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "applicationId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Accepted"
+      ],
+      "default": "Pending"
+    },
+    "policyVersion": {
+      "type": "string",
+      "default": "v1.0"
+    },
+    "privacyNotice": {
+      "type": "boolean",
+      "default": false
+    },
+    "dataSharing": {
+      "type": "boolean",
+      "default": false
+    },
+    "accuracyDeclaration": {
+      "type": "boolean",
+      "default": false
+    },
+    "communicationsConsent": {
+      "type": "boolean",
+      "default": false
+    },
+    "acceptedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "borrowerEmail"
+  ]
+}

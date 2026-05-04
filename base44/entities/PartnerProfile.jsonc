@@ -1,0 +1,43 @@
+{
+  "name": "PartnerProfile",
+  "type": "object",
+  "properties": {
+    "institutionName": {
+      "type": "string"
+    },
+    "institutionType": {
+      "type": "string",
+      "enum": [
+        "Rural bank",
+        "Commercial bank",
+        "Microfinance institution",
+        "Cooperative",
+        "Lending company",
+        "Financing company",
+        "NGO",
+        "Other"
+      ]
+    },
+    "contactPerson": {
+      "type": "string"
+    },
+    "contactEmail": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Suspended"
+      ],
+      "default": "Active"
+    }
+  },
+  "required": [
+    "institutionName"
+  ]
+}

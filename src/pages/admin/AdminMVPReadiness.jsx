@@ -21,10 +21,10 @@ const FEATURES = [
   { label: 'Support request management', status: 'complete', note: 'Admin support ticket workflow.' },
   { label: 'Repayment tracking (manual)', status: 'complete', note: 'Manual repayment status tracking.' },
   { label: 'Compliance overview', status: 'complete', note: 'Legal positioning confirmations and pending items.' },
-  { label: 'Real AI integration (InvokeLLM)', status: 'pending', note: 'Can be wired to Core.InvokeLLM with active admin prompt.' },
-  { label: 'Real file upload (UploadFile)', status: 'pending', note: 'Can be wired to Core.UploadFile for actual document storage.' },
-  { label: 'Email notifications', status: 'pending', note: 'Can be wired to Core.SendEmail for borrower and partner notifications.' },
-  { label: 'Real authentication (Base44 auth)', status: 'pending', note: 'Currently using demo auth. Can be migrated to Base44 auth.' },
+  { label: 'Real AI integration (InvokeLLM)', status: 'complete', note: 'Wired to Core.InvokeLLM using active admin prompt from AI Prompt Manager.' },
+  { label: 'Real file upload (UploadFile)', status: 'complete', note: 'Wired to Core.UploadFile — documents stored and accessible via URL.' },
+  { label: 'Email notifications', status: 'complete', note: 'Core.SendEmail sends notifications on application submit, consent, and partner decisions.' },
+  { label: 'Real authentication (Base44 auth)', status: 'complete', note: 'Migrated from demo auth to Base44 real auth with role-based access.' },
   { label: 'BSP/SEC regulatory approval', status: 'pending', note: 'Required before public lending operations.' },
 ];
 

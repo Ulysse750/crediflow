@@ -1,0 +1,49 @@
+{
+  "name": "Loan",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "applicationId": {
+      "type": "string"
+    },
+    "groupId": {
+      "type": "string"
+    },
+    "partnerProfileId": {
+      "type": "string"
+    },
+    "partnerName": {
+      "type": "string"
+    },
+    "approvedAmount": {
+      "type": "number"
+    },
+    "disbursementDate": {
+      "type": "string"
+    },
+    "repaymentFrequency": {
+      "type": "string"
+    },
+    "totalInstallments": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Approved",
+        "Active",
+        "Fully repaid",
+        "Late",
+        "Restructured",
+        "Defaulted"
+      ],
+      "default": "Approved"
+    }
+  },
+  "required": [
+    "borrowerEmail",
+    "applicationId"
+  ]
+}

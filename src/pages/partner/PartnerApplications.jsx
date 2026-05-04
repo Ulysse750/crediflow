@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDemoAuth } from '@/lib/demoAuth';
-import { getPartnerData, getBorrowerName, getGroupName } from '@/lib/mockData';
+import { useAuth } from '@/lib/useAuth';
+import { base44 } from '@/api/base44Client';
 import PageHeader from '@/components/shared/PageHeader';
 import StatusChip from '@/components/shared/StatusChip';
 import ComplianceDisclaimer from '@/components/shared/ComplianceDisclaimer';
@@ -11,13 +11,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Eye } from 'lucide-react';
 
 export default function PartnerApplications() {
-  const { user } = useDemoAuth();
-  const data = getPartnerData(user?.partnerId || '');
+  const { user } = useAuth();
+  const [partner, setPartner] = useState(null);
+  const [applications, setApplications] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-  const filtered = statusFilter === 'all'
-    ? data.applications
-    : data.applications.filter(a => a.status === statusFilter || a.partnerDecision === statusFilter);
+  useEffect(() => {
+    if (!user) return;
+    base44.entities.PartnerProfile.filter({ created_by: user.email }).then(async ([p]) => {
+      setPartner(p || null);
+      if (p) {
+        const apps = await base44.entities.LoanApplication.filter({ partnerProfileId: p.id });
+        setApplications(apps);
+      }
+      setLoading(false);
+    });
+  }, [user]);
+
+  const filtered = statusFilter === 'all' ? applications : applications.filter(a => a.status === statusFilter || a.partnerDecision === statusFilter);
+
+  if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-6 w-6 border-2 border-primary border-t-transparent" /></div>;
 
   return (
     <div className="space-y-6">
@@ -35,15 +49,14 @@ export default function PartnerApplications() {
         </Select>
       </PageHeader>
       <ComplianceDisclaimer variant="partner" />
-
       <div className="space-y-3">
         {filtered.map(app => (
           <Card key={app.id}>
             <CardContent className="py-4">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3 flex-1 text-sm">
-                  <div><p className="text-xs text-muted-foreground">ID</p><p className="font-medium">{app.id}</p></div>
-                  <div><p className="text-xs text-muted-foreground">Borrower</p><p className="font-medium">{getBorrowerName(app.borrowerId)}</p></div>
+                  <div><p className="text-xs text-muted-foreground">ID</p><p className="font-medium font-mono text-xs">{app.id}</p></div>
+                  <div><p className="text-xs text-muted-foreground">Borrower</p><p className="font-medium">{app.borrowerEmail?.split('@')[0]}</p></div>
                   <div><p className="text-xs text-muted-foreground">Amount</p><p className="font-medium">₱{app.amount?.toLocaleString()}</p></div>
                   <div><p className="text-xs text-muted-foreground">Status</p><StatusChip status={app.status} /></div>
                   <div><p className="text-xs text-muted-foreground">Decision</p><StatusChip status={app.partnerDecision} /></div>
@@ -55,9 +68,7 @@ export default function PartnerApplications() {
             </CardContent>
           </Card>
         ))}
-        {filtered.length === 0 && (
-          <Card className="p-8 text-center text-muted-foreground">No applications found.</Card>
-        )}
+        {filtered.length === 0 && <Card className="p-8 text-center text-muted-foreground">No applications found.</Card>}
       </div>
     </div>
   );

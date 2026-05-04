@@ -1,0 +1,48 @@
+{
+  "name": "SupportRequest",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "applicationId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "In progress",
+        "Waiting for borrower",
+        "Waiting for partner",
+        "Resolved"
+      ],
+      "default": "New"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "default": "Medium"
+    },
+    "resolvedAt": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "borrowerEmail",
+    "message"
+  ]
+}

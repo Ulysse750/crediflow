@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDemoAuth } from '@/lib/demoAuth';
+import { useAuth } from '@/lib/useAuth';
 import Logo from '@/components/shared/Logo';
 import { Button } from '@/components/ui/button';
 import { LogIn, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 
 export default function PublicHeader() {
-  const { user, logout, isAuthenticated } = useDemoAuth();
+  const { user, logout, isAuthenticated } = useAuth();
   const [open, setOpen] = React.useState(false);
 
   const dashboardPath = user?.role === 'borrower' ? '/borrower' : user?.role === 'partner' ? '/partner' : '/admin';
@@ -18,7 +18,6 @@ export default function PublicHeader() {
           <Logo size="sm" />
         </Link>
 
-        {/* Desktop */}
         <nav className="hidden sm:flex items-center gap-3">
           <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2">Home</Link>
           {isAuthenticated ? (
@@ -48,13 +47,11 @@ export default function PublicHeader() {
           )}
         </nav>
 
-        {/* Mobile toggle */}
         <button className="sm:hidden p-2" onClick={() => setOpen(!open)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile nav */}
       {open && (
         <div className="sm:hidden border-t border-border bg-white px-4 py-3 space-y-2">
           <Link to="/" className="block text-sm py-2" onClick={() => setOpen(false)}>Home</Link>

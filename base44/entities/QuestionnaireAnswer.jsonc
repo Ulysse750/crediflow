@@ -1,0 +1,107 @@
+{
+  "name": "QuestionnaireAnswer",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "completionStatus": {
+      "type": "string",
+      "enum": [
+        "In progress",
+        "Complete"
+      ],
+      "default": "In progress"
+    },
+    "A1": {
+      "type": "string"
+    },
+    "A2": {
+      "type": "string"
+    },
+    "A3": {
+      "type": "string"
+    },
+    "A4": {
+      "type": "string"
+    },
+    "A5": {
+      "type": "string"
+    },
+    "A6": {
+      "type": "string"
+    },
+    "B1": {
+      "type": "string"
+    },
+    "B2": {
+      "type": "string"
+    },
+    "B3": {
+      "type": "string"
+    },
+    "B4": {
+      "type": "string"
+    },
+    "B5": {
+      "type": "string"
+    },
+    "C1": {
+      "type": "string"
+    },
+    "C2": {
+      "type": "string"
+    },
+    "C3": {
+      "type": "string"
+    },
+    "C4": {
+      "type": "string"
+    },
+    "D1": {
+      "type": "string"
+    },
+    "D2": {
+      "type": "string"
+    },
+    "D3": {
+      "type": "string"
+    },
+    "D4": {
+      "type": "string"
+    },
+    "D5": {
+      "type": "string"
+    },
+    "E1": {
+      "type": "string"
+    },
+    "E2": {
+      "type": "string"
+    },
+    "E3": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "E4": {
+      "type": "string"
+    },
+    "F1": {
+      "type": "boolean"
+    },
+    "F2": {
+      "type": "boolean"
+    },
+    "F3": {
+      "type": "boolean"
+    },
+    "F4": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "borrowerEmail"
+  ]
+}

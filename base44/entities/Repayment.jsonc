@@ -1,0 +1,47 @@
+{
+  "name": "Repayment",
+  "type": "object",
+  "properties": {
+    "loanId": {
+      "type": "string"
+    },
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "amountDue": {
+      "type": "number"
+    },
+    "amountPaid": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Upcoming",
+        "Paid",
+        "Partially paid",
+        "Late",
+        "Missed",
+        "Rescheduled"
+      ],
+      "default": "Upcoming"
+    },
+    "paidAt": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "loanId",
+    "borrowerEmail",
+    "dueDate",
+    "amountDue"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "name": "AIAnalysis",
+  "type": "object",
+  "properties": {
+    "applicationId": {
+      "type": "string"
+    },
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "partnerProfileId": {
+      "type": "string"
+    },
+    "promptId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "documentsReviewed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missingDocuments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "profileSummary": {
+      "type": "string"
+    },
+    "loanRequestSummary": {
+      "type": "string"
+    },
+    "incomeSummary": {
+      "type": "string"
+    },
+    "groupContextSummary": {
+      "type": "string"
+    },
+    "documentSummary": {
+      "type": "string"
+    },
+    "repaymentEvidence": {
+      "type": "string"
+    },
+    "alternativeDataSummary": {
+      "type": "string"
+    },
+    "inconsistencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "riskObservations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "followUpQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "humanReviewSteps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "partnerSummary": {
+      "type": "string"
+    },
+    "humanReviewRequired": {
+      "type": "boolean",
+      "default": true
+    },
+    "reviewedAt": {
+      "type": "string"
+    },
+    "disclaimer": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "applicationId",
+    "borrowerEmail"
+  ]
+}

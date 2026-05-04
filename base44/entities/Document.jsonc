@@ -1,0 +1,47 @@
+{
+  "name": "Document",
+  "type": "object",
+  "properties": {
+    "borrowerEmail": {
+      "type": "string"
+    },
+    "applicationId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Not uploaded",
+        "Uploaded",
+        "Under review",
+        "Approved",
+        "Rejected",
+        "Needs replacement"
+      ],
+      "default": "Not uploaded"
+    },
+    "aiStatus": {
+      "type": "string",
+      "enum": [
+        "AI analysis pending",
+        "AI analysis completed"
+      ]
+    },
+    "fileUrl": {
+      "type": "string"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "borrowerEmail",
+    "type"
+  ]
+}
