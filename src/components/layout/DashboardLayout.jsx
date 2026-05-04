@@ -62,8 +62,8 @@ export default function DashboardLayout({ role }) {
   useEffect(() => {
     if (loading || !user) return;
 
-    // New borrower: no role yet — auto-assign 'borrower' and send welcome email
-    if (!user.role && role === 'borrower') {
+    // New borrower: no role yet (or default 'user' role) — auto-assign 'borrower' and send welcome email
+    if ((!user.role || user.role === 'user') && role === 'borrower') {
       setAssigning(true);
       base44.auth.updateMe({ role: 'borrower' }).then(() => {
         base44.integrations.Core.SendEmail({
