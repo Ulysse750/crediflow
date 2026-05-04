@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { base44 } from '@/api/base44Client';
 import PublicHeader from '@/components/layout/PublicHeader';
 import Footer from '@/components/layout/Footer';
 import Logo from '@/components/shared/Logo';
@@ -26,6 +27,15 @@ const partnerBenefits = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    base44.auth.me().then(user => {
+      if (!user) return;
+      if (user.role === 'partner') window.location.replace('/partner');
+      else if (user.role === 'admin') window.location.replace('/admin');
+      else window.location.replace('/borrower');
+    }).catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <PublicHeader />
