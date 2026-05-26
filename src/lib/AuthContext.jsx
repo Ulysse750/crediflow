@@ -9,21 +9,30 @@ export const AuthProvider = ({ children }) => {
   const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      // Safety net: if auth.me() never resolves (e.g. network issue, wrong serverUrl),
+      // stop the spinner after 8s and treat as unauthenticated.
+      setUser(null);
+      setIsLoadingAuth(false);
+    }, 8000);
+
     base44.auth.me()
       .then(currentUser => {
+        clearTimeout(timeout);
         setUser(currentUser || null);
         setIsLoadingAuth(false);
       })
       .catch(err => {
-        // user_not_registered: email exists in auth but not registered in this app
+        clearTimeout(timeout);
         const reason = err?.data?.extra_data?.reason || err?.extra_data?.reason;
         if (reason === 'user_not_registered' || err?.status === 403) {
           setAuthError({ type: 'user_not_registered' });
         }
-        // Any other error (401 = not logged in, network, etc.) → treat as unauthenticated
         setUser(null);
         setIsLoadingAuth(false);
       });
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const logout = () => {
