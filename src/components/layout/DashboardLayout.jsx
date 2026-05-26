@@ -53,7 +53,7 @@ const ADMIN_NAV = [
 const NAV_MAP = { borrower: BORROWER_NAV, partner: PARTNER_NAV, admin: ADMIN_NAV };
 
 export default function DashboardLayout({ role }) {
-  const { user, loading, logout } = useAuth();
+  const { user, isLoadingAuth: loading, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -143,7 +143,7 @@ export default function DashboardLayout({ role }) {
       </nav>
       <div className="p-4 border-t border-sidebar-border">
         <div className="text-xs text-sidebar-foreground/60 mb-3 truncate">{user.full_name || user.email}</div>
-        <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50" onClick={logout}>
+        <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50" onClick={() => base44.auth.logout('/')}>
           <LogOut className="w-4 h-4" /> Logout
         </Button>
       </div>

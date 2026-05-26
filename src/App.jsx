@@ -5,6 +5,8 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import DashboardLayout from '@/components/layout/DashboardLayout';
+import { AuthProvider, useAuth } from '@/lib/AuthContext.jsx';
+import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 
 // Public pages
 import Home from '@/pages/public/Home';
@@ -55,11 +57,9 @@ import AdminRiskFlags from '@/pages/admin/AdminRiskFlags';
 import AdminCompliance from '@/pages/admin/AdminCompliance';
 import AdminSettings from '@/pages/admin/AdminSettings';
 
-function App() {
+function AppRoutes() {
   return (
-    <QueryClientProvider client={queryClientInstance}>
-      <Router>
-        <Routes>
+    <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -117,11 +117,31 @@ function App() {
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClientInstance}>
+      <Router>
+        <AuthProvider>
+          <AppInner />
+        </AuthProvider>
       </Router>
       <Toaster />
       <Sonner richColors position="top-right" />
     </QueryClientProvider>
   );
+}
+
+function AppInner() {
+  const { authError } = useAuth();
+
+  if (authError?.type === 'user_not_registered') {
+    return <UserNotRegisteredError />;
+  }
+
+  return <AppRoutes />;
 }
 
 export default App;
