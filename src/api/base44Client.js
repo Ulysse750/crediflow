@@ -1,15 +1,14 @@
 import { createClient } from '@base44/sdk';
 import { appParams } from '@/lib/app-params';
 
-const { appId, functionsVersion, appBaseUrl } = appParams;
+const { appId, functionsVersion, appBaseUrl, serverUrl } = appParams;
 
-// Do NOT pass token here — let the SDK read it dynamically from localStorage on each request.
-// Passing token at init time captures a null value on first load (when token arrives via URL
-// and is stored to localStorage by app-params.js), causing all auth calls to fail.
+// serverUrl comes from the `server_url` URL param (injected by Base44 preview runtime).
+// appBaseUrl comes from `app_base_url`. Both fall back to VITE env vars.
+// Do NOT pass token at init — SDK reads base44_access_token from localStorage dynamically.
 export const base44 = createClient({
   appId,
   functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
+  serverUrl: serverUrl || appBaseUrl || '',
+  appBaseUrl,
 });

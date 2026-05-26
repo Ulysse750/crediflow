@@ -15,10 +15,12 @@ export const AuthProvider = ({ children }) => {
         setIsLoadingAuth(false);
       })
       .catch(err => {
-        // user_not_registered is a special platform error — show a specific screen
-        if (err?.data?.extra_data?.reason === 'user_not_registered' || err?.status === 403) {
+        // user_not_registered: email exists in auth but not registered in this app
+        const reason = err?.data?.extra_data?.reason || err?.extra_data?.reason;
+        if (reason === 'user_not_registered' || err?.status === 403) {
           setAuthError({ type: 'user_not_registered' });
         }
+        // Any other error (401 = not logged in, network, etc.) → treat as unauthenticated
         setUser(null);
         setIsLoadingAuth(false);
       });
