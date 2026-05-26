@@ -1,21 +1,14 @@
 import React, { useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 
+// This page is the landing point after Base44 OAuth login/signup.
+// The SDK reads the token from localStorage automatically (no singleton re-init needed).
+// We just call auth.me() and route based on role.
 export default function AuthRedirect() {
   useEffect(() => {
-    // If access_token is in the URL, app-params.js has already stored it to
-    // localStorage. We must do a full hard reload so the base44 SDK client
-    // re-initialises with that token (it's a singleton created at import time).
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('access_token')) {
-      // Reload the page without the token in the URL — SDK will pick it up from localStorage
-      window.location.href = window.location.origin + '/auth-redirect';
-      return;
-    }
-
     base44.auth.me().then(user => {
       if (!user) {
-        window.location.href = '/';
+        window.location.href = '/login';
         return;
       }
       if (user.role === 'partner') {
@@ -23,10 +16,12 @@ export default function AuthRedirect() {
       } else if (user.role === 'admin') {
         window.location.href = '/admin';
       } else {
+        // borrower role, or no role yet (new user) → go to borrower dashboard
+        // DashboardLayout will auto-assign the 'borrower' role on first visit
         window.location.href = '/borrower';
       }
     }).catch(() => {
-      window.location.href = '/';
+      window.location.href = '/login';
     });
   }, []);
 
