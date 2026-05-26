@@ -2,57 +2,46 @@ import React from 'react';
 
 export default function Logo({ size = 'md', light = false }) {
   const sizes = { sm: 'text-lg', md: 'text-2xl', lg: 'text-3xl' };
-  const iconSize = { sm: 'w-6 h-6', md: 'w-8 h-8', lg: 'w-10 h-10' };
+  const iconSize = { sm: 'w-7 h-7', md: 'w-9 h-9', lg: 'w-11 h-11' };
+
+  const darkGreen = light ? '#bbf7d0' : '#1a5c38';
+  const midGreen = light ? '#86efac' : '#2d7a4f';
+  const lightGreen = light ? '#4ade80' : '#5cb85c';
+  const stem = light ? '#bbf7d0' : '#1a6b3a';
 
   return (
     <div className="flex items-center gap-2">
-      {/* Hand + sprout icon */}
       <svg
         className={iconSize[size]}
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Hand / leaf base */}
+        {/* Curved hand/wave base */}
         <path
-          d="M4 26 C8 22 14 20 20 22 C26 24 32 22 36 18"
-          stroke={light ? '#a7f3a0' : '#1a6b3a'}
+          d="M3 28 C8 22 15 20 20 23 C25 26 32 23 37 18"
+          stroke={darkGreen}
           strokeWidth="3"
           strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M6 28 C10 24 16 22 22 24 C28 26 33 24 36 20"
-          stroke={light ? '#bbf7d0' : '#22543d'}
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-          opacity="0.5"
         />
         {/* Left leaf */}
         <path
-          d="M16 22 C14 16 10 12 14 8 C16 12 18 16 16 22Z"
-          fill={light ? '#86efac' : '#2d7a4f'}
+          d="M17 23 C15 17 11 12 15 7 C17 11 19 17 17 23Z"
+          fill={midGreen}
         />
         {/* Right leaf */}
         <path
-          d="M21 20 C22 14 26 10 24 6 C20 9 18 14 21 20Z"
-          fill={light ? '#4ade80' : '#5cb85c'}
+          d="M21 21 C23 15 27 10 25 5 C21 9 19 15 21 21Z"
+          fill={lightGreen}
         />
-        {/* Center sprout */}
-        <path
-          d="M19 22 L19 14"
-          stroke={light ? '#bbf7d0' : '#1a6b3a'}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        {/* Stem */}
+        <line x1="19" y1="23" x2="19" y2="14" stroke={stem} strokeWidth="1.5" strokeLinecap="round" />
       </svg>
 
-      {/* Text: tawi.la with two-tone styling */}
       <span className={`font-display font-bold tracking-tight ${sizes[size]}`}>
-        <span style={{ color: light ? '#fff' : '#1a5c38' }}>tawi</span>
-        <span style={{ color: light ? '#86efac' : '#4a9e4a' }}>.</span>
-        <span style={{ color: light ? '#4ade80' : '#5cb85c' }}>la</span>
+        <span style={{ color: light ? '#ffffff' : '#1a5c38' }}>tawi</span>
+        <span style={{ color: lightGreen }}>.</span>
+        <span style={{ color: lightGreen }}>la</span>
       </span>
     </div>
   );
