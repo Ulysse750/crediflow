@@ -36,7 +36,7 @@ export default function Register() {
       <div className="flex-1 flex items-start justify-center py-10 px-4">
         <div className="w-full max-w-lg">
           <div className="text-center mb-8">
-           <h1 className="text-2xl font-display font-bold text-foreground">Join CrediFlow</h1>
+           <h1 className="text-2xl font-display font-bold text-foreground">Join tawi.la</h1>
            <p className="text-sm text-muted-foreground mt-1">
              Create your borrower account to apply for loans through licensed lending partners.
            </p>
@@ -65,7 +65,7 @@ export default function Register() {
             <div className="p-3 bg-muted/50 rounded-lg border border-border/50 text-xs text-muted-foreground flex gap-2">
               <Info className="w-4 h-4 shrink-0 mt-0.5" />
               <p>
-                CrediFlow does not provide loans directly. Loan decisions are made entirely by licensed lending partners.
+                tawi.la does not provide loans directly. Loan decisions are made entirely by licensed lending partners.
                 No loan approval is guaranteed. We do not charge borrowers any fees for using this platform.
               </p>
             </div>
@@ -78,7 +78,7 @@ export default function Register() {
                 className="mt-0.5"
               />
               <label htmlFor="consent" className="text-sm text-foreground cursor-pointer leading-relaxed">
-                I understand CrediFlow is a loan-origination platform, not a lender. I agree to the{' '}
+                I understand tawi.la is a loan-origination platform, not a lender. I agree to the{' '}
                 <span className="text-secondary font-medium">Privacy Notice</span> and{' '}
                 <span className="text-secondary font-medium">Data Processing Terms</span>.
                 My application data will be shared with licensed lending partners for review.
@@ -100,7 +100,7 @@ export default function Register() {
             <Link to="/login" className="text-secondary font-medium hover:underline">Sign in here</Link>
           </p>
           <p className="text-center text-xs text-muted-foreground/60 mt-2">
-            Partner institutions and admins are invited directly by CrediFlow.
+            Partner institutions and admins are invited directly by tawi.la.
           </p>
         </div>
       </div>

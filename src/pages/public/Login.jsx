@@ -22,7 +22,7 @@ export default function Login() {
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm space-y-6 text-center">
           <div>
-            <h1 className="text-2xl font-display font-bold text-foreground">Sign in to CrediFlow</h1>
+            <h1 className="text-2xl font-display font-bold text-foreground">Sign in to tawi.la</h1>
             <p className="text-sm text-muted-foreground mt-1">Use your registered email address</p>
           </div>
           <div className="bg-card border border-border rounded-xl p-6 shadow-sm space-y-4">
@@ -37,7 +37,7 @@ export default function Login() {
             </Button>
           </div>
           <div className="bg-muted/40 rounded-lg p-3 border border-border/50">
-            <p className="text-sm font-medium text-foreground mb-2">New to CrediFlow?</p>
+            <p className="text-sm font-medium text-foreground mb-2">New to tawi.la?</p>
             <Link to="/register">
               <Button variant="outline" className="w-full gap-2">
                 Create your account
@@ -45,7 +45,7 @@ export default function Login() {
             </Link>
           </div>
           <p className="text-xs text-muted-foreground/60 text-center">
-            Partner and admin accounts are invited directly by CrediFlow.
+            Partner and admin accounts are invited directly by tawi.la.
           </p>
         </div>
       </div>

@@ -3,10 +3,10 @@ import { Info } from 'lucide-react';
 
 export default function ComplianceDisclaimer({ variant = 'default' }) {
   const messages = {
-    default: 'CrediFlow does not directly provide loans. Loan decisions are made by licensed lending partners. No loan approval is guaranteed.',
+    default: 'tawi.la does not directly provide loans. Loan decisions are made by licensed lending partners. No loan approval is guaranteed.',
     ai: 'This AI-generated summary is a review aid only. It is not a credit decision, legal conclusion, fraud finding, or approval recommendation. Final decisions remain with licensed partners and human reviewers.',
-    partner: 'Partner decisions are made by the licensed lending partner. CrediFlow provides organisation, workflow support, and preliminary review information only.',
-    repayment: 'CrediFlow does not process or hold funds. Payments are handled by the licensed partner or approved payment provider.',
+    partner: 'Partner decisions are made by the licensed lending partner. tawi.la provides organisation, workflow support, and preliminary review information only.',
+    repayment: 'tawi.la does not process or hold funds. Payments are handled by the licensed partner or approved payment provider.',
     risk: 'Risk flags are workflow review aids only. They are not automated credit decisions.',
   };
 

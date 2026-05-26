@@ -73,7 +73,7 @@ export default function Home() {
               Responsible credit,<br />made simple.
             </h1>
             <p className="mt-5 text-lg text-white/80 leading-relaxed max-w-lg">
-              CrediFlow helps trusted borrower groups apply for loans through licensed lending partners in the Philippines and Southeast Asia.
+              tawi.la helps trusted borrower groups apply for loans through licensed lending partners in the Philippines and Southeast Asia.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/register">
@@ -156,8 +156,8 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Shield className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
           <p className="text-sm text-muted-foreground leading-relaxed">
-            CrediFlow does not directly provide loans. Loan decisions are made by licensed lending partners. 
-            CrediFlow is a technology and loan-origination workflow platform that helps borrowers submit applications 
+            tawi.la does not directly provide loans. Loan decisions are made by licensed lending partners. 
+            tawi.la is a technology and loan-origination workflow platform that helps borrowers submit applications 
             and routes them to licensed partners. No loan approval is guaranteed.
           </p>
         </div>
