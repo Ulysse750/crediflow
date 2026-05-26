@@ -60,7 +60,13 @@ export default function DashboardLayout({ role }) {
   const [assigning, setAssigning] = useState(false);
 
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading) return;
+
+    // Not logged in → redirect to login
+    if (!user) {
+      navigate('/login', { replace: true });
+      return;
+    }
 
     // New borrower: no role yet (or default 'user' role) — auto-assign 'borrower' and send welcome email
     if ((!user.role || user.role === 'user') && role === 'borrower') {
@@ -74,12 +80,6 @@ export default function DashboardLayout({ role }) {
         setAssigning(false);
         navigate('/borrower', { replace: true });
       }).catch(() => setAssigning(false));
-      return;
-    }
-
-    // Not logged in → login
-    if (!user) {
-      navigate('/login', { replace: true });
       return;
     }
 
