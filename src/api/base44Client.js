@@ -1,16 +1,23 @@
 import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
 
-const { appId, functionsVersion, appBaseUrl } = appParams;
+const appId = import.meta.env.VITE_BASE44_APP_ID;
+const functionsVersion = import.meta.env.VITE_BASE44_FUNCTIONS_VERSION;
 
-// Read server_url directly from the current URL params first (most reliable at init time),
-// then fall back to localStorage (via appParams), then VITE env, then empty string.
-const urlServerUrl = new URLSearchParams(window.location.search).get('server_url');
-const serverUrl = urlServerUrl || appParams.serverUrl || appBaseUrl || '';
+// Read server_url from URL params first, then fall back to env var.
+const params = new URLSearchParams(window.location.search);
+const serverUrl =
+  params.get('server_url') ||
+  localStorage.getItem('base44_server_url') ||
+  import.meta.env.VITE_BASE44_APP_BASE_URL ||
+  '';
+
+// Persist it so refreshes / direct nav still work.
+if (params.get('server_url')) {
+  localStorage.setItem('base44_server_url', params.get('server_url'));
+}
 
 export const base44 = createClient({
   appId,
   functionsVersion,
   serverUrl,
-  appBaseUrl,
 });

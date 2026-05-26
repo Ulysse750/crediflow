@@ -9,18 +9,14 @@ export const AuthProvider = ({ children }) => {
   const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
-    // If there's no token in localStorage at all, skip the network call entirely.
-    const token = localStorage.getItem('base44_access_token');
-    if (!token) {
-      setUser(null);
-      setIsLoadingAuth(false);
-      return;
-    }
+    // Race auth.me() against a 5s timeout so the spinner never hangs forever.
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('auth_timeout')), 5000)
+    );
 
-    base44.auth.me()
+    Promise.race([base44.auth.me(), timeoutPromise])
       .then(currentUser => {
         setUser(currentUser || null);
-        setIsLoadingAuth(false);
       })
       .catch(err => {
         const reason = err?.data?.extra_data?.reason || err?.extra_data?.reason;
@@ -28,6 +24,8 @@ export const AuthProvider = ({ children }) => {
           setAuthError({ type: 'user_not_registered' });
         }
         setUser(null);
+      })
+      .finally(() => {
         setIsLoadingAuth(false);
       });
   }, []);
