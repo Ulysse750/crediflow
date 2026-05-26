@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { LogIn, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 
 export default function PublicHeader() {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [open, setOpen] = React.useState(false);
 
   const dashboardPath = user?.role === 'borrower' ? '/borrower' : user?.role === 'partner' ? '/partner' : '/admin';

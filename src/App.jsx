@@ -135,7 +135,17 @@ function App() {
 }
 
 function AppInner() {
-  const { authError } = useAuth();
+  const { authError, isLoadingAuth } = useAuth();
+
+  // Wait for auth to resolve before rendering any routes.
+  // This prevents DashboardLayout from briefly seeing user=null and redirecting to /login.
+  if (isLoadingAuth) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
   if (authError?.type === 'user_not_registered') {
     return <UserNotRegisteredError />;

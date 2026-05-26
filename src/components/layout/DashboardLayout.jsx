@@ -53,16 +53,14 @@ const ADMIN_NAV = [
 const NAV_MAP = { borrower: BORROWER_NAV, partner: PARTNER_NAV, admin: ADMIN_NAV };
 
 export default function DashboardLayout({ role }) {
-  const { user, isLoadingAuth: loading, logout } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [assigning, setAssigning] = useState(false);
 
   useEffect(() => {
-    if (loading) return;
-
-    // Not logged in → redirect to login
+    // Auth is already resolved by the time DashboardLayout renders (AppInner waits).
     if (!user) {
       navigate('/login', { replace: true });
       return;
@@ -88,9 +86,9 @@ export default function DashboardLayout({ role }) {
       const correctPath = user.role === 'borrower' ? '/borrower' : user.role === 'partner' ? '/partner' : '/admin';
       navigate(correctPath, { replace: true });
     }
-  }, [user, loading, role]);
+  }, [user, role]);
 
-  if (loading || assigning) {
+  if (assigning) {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent" />
@@ -98,10 +96,7 @@ export default function DashboardLayout({ role }) {
     );
   }
 
-  if (!user) {
-    navigate('/login', { replace: true });
-    return null;
-  }
+  if (!user) return null;
 
   // If user has a role mismatch, show spinner while redirect happens
   if (user.role && user.role !== role) {
